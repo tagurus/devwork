@@ -1,0 +1,6 @@
+FROM tomcat:8.0
+MAINTAINER Vasiliy Minin <tagurus@gmail.com>
+RUN apt-get update
+#RUN apt-get -y install openjdk-7-jdk
+RUN apt-get -y install haveged
+EXPOSE 8080
