@@ -1,0 +1,23 @@
+version: '2'
+services:
+    compiler:
+        build: ~/dockerc/compiler
+        working_dir: /tmp/compile/box/
+        command: >
+            bash -c "git clone http://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+            /tmp/compile/box/; mvn install"
+        volumes:
+            - build:/tmp/compile
+    tomcat:
+        build: ~/dockerc/tomcat
+        links:
+            - compiler
+        command: >
+            bash -c "sleep 10; mv /tmp/compile/box/target/hello-1.0.war /usr/local/tomcat/webapps;
+            catalina.sh run"
+        ports:
+            - "8080:8080"
+        volumes:
+            - build:/tmp/compile
+volumes:
+    build:
