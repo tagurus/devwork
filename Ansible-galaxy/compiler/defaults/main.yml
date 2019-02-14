@@ -1,0 +1,4 @@
+---
+# defaults file for compiler
+src: /root/box/target
+dst: /root/roles/compiler/files

@@ -1,0 +1,11 @@
+---
+# tasks file for tomcat
+- name: install tomcat
+  apt:
+   name: tomcat8
+   state: present
+
+- name: copy
+  copy: src={{ src }}/hello-1.0.war dest={{ dst }}/hello-1.0.war
+  notify:
+   - restart tomcat

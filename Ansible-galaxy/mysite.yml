@@ -1,0 +1,15 @@
+---
+
+- name: compiler config
+  hosts: compiler
+  become: yes
+
+  roles:
+   - compiler
+
+- name: tomcat config
+  hosts: tomcat
+  become: yes
+
+  roles:
+   - tomcat

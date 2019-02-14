@@ -1,0 +1,19 @@
+---
+# tasks file for compiler
+- name: install packages
+  apt: name={{item}} state=installed
+  with_items:
+   - openjdk-8-jdk
+   - git
+   - maven
+- name: gitcone
+  git:
+   repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello'
+   dest: /root/box/
+   clone: yes
+- name: compile
+  shell: mvn install
+  args:
+   chdir: /root/box/
+- name: copy file
+  fetch: dest={{dst}}/hello-1.0.war src={{src}}/hello-1.0.war flat=yes

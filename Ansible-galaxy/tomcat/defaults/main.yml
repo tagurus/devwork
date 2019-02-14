@@ -1,0 +1,4 @@
+---
+# defaults file for tomcat
+src: /root/roles/compiler/files
+dst: /var/lib/tomcat8/webapps
