@@ -1,0 +1,23 @@
+pipeline {
+agent any
+
+    stages {
+        stage ('git') {
+            steps {
+            git 'https://github.com/tagurus/test2.git'
+            }
+        }
+        stage ('build') {
+            steps {
+            sh 'mvn package'
+            }
+        }
+        stage ('copy') {
+            steps {
+                sshagent (['93fb4685-580f-4030-acaf-091b22633b17']) {
+                    sh 'scp /var/lib/jenkins/workspace/dev1/target/hello-1.0.war root@35.229.62.106:/var/lib/tomcat8/webapps/ && ssh root@35.229.62.106 "service tomcat8 restart" '
+                }
+            }        
+        }
+    }    
+}    
