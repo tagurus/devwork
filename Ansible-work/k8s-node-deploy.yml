@@ -1,0 +1,18 @@
+---
+- name: install packs
+  hosts: all
+  tasks:
+  - name: copy docker repo
+    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && apt update
+  - name: copy k8s repo
+    shell: curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && add-apt-repository "deb https://apt.kubernetes.io/ kubernetes-xenial main " && apt update
+  - name: install docker
+    apt: name=docker-ce state=latest
+  - name: install docker-cli
+    apt: name=docker-ce-cli state=latest
+  - name: install conteinerd
+    apt: name=containerd.io state=latest
+  - name: install kubeadm
+    apt: name=kubeadm state=latest
+  - name: install kubelet
+    apt: name=kubelet state=latest
